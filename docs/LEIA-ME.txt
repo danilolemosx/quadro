@@ -1,4 +1,4 @@
-QUADRO 0.1.0 — o quadro de cenas do seu filme
+QUADRO 0.1.1 — o quadro de cenas do seu filme
 =============================================
 
 O QUE É
@@ -20,9 +20,9 @@ Para levar o projeto para outro computador, copie a pasta "Nome.quadro" inteira.
 
 
 QUAL ARQUIVO BAIXAR
-- Mac com chip Apple (M1, M2, M3, M4): Quadro_0.1.0_aarch64.dmg
-- Mac com processador Intel:          Quadro_0.1.0_x64.dmg
-- Windows 10/11:                      Quadro_0.1.0_x64-setup.exe
+- Mac com chip Apple (M1, M2, M3, M4): Quadro_0.1.1_aarch64.dmg
+- Mac com processador Intel:          Quadro_0.1.1_x64.dmg
+- Windows 10/11:                      Quadro_0.1.1_x64-setup.exe
 
 Não sabe qual é o seu Mac? Menu Apple () > Sobre Este Mac.
 "Chip Apple M..." = aarch64. "Processador Intel" = x64.
