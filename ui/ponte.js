@@ -54,7 +54,8 @@ const Ponte = (() => {
     /** Arquivos arrastados do Finder: cb(tipo, caminhos, x, y), tipo = "over" | "drop" | "leave". */
     aoArrastarArquivos: (cb) => T.webview.getCurrentWebview().onDragDropEvent((ev) => {
       const p = ev.payload;
-      const r = window.devicePixelRatio || 1;
+      // No Mac o Tauri já entrega a posição em pontos (como o CSS); no Windows, em pixels físicos.
+      const r = /Mac/.test(navigator.platform) ? 1 : window.devicePixelRatio || 1;
       const x = p.position ? p.position.x / r : 0;
       const y = p.position ? p.position.y / r : 0;
       if (p.type === "enter" || p.type === "over") cb("over", p.paths || [], x, y);

@@ -118,10 +118,16 @@ pub fn numero_do_arquivo(nome: &str, existentes: &[String]) -> Option<String> {
         }
         cs[j..k].iter().collect()
     };
+    // Vale o número logo depois de "CENA"/"SC"/"SCENE" ou o número que começa o nome ("41.jpg", "041 - rua.png").
+    // Números no meio do nome sem a palavra CENA ("Captura de Tela 2026-10-09", "IMG_2034") não são cenas.
     let &(ini, fim) = corridas
         .iter()
         .find(|(ini, _)| matches!(antes(*ini).as_str(), "CENA" | "SC" | "SCENE" | "CENAS"))
-        .or_else(|| corridas.first())?;
+        .or_else(|| corridas.first().filter(|(ini, _)| *ini == 0))?;
+    // data no começo do nome (2026-10-09, 2026_10_09)
+    if ini == 0 && fim - ini == 4 && cs.get(fim).is_some_and(|c| matches!(c, '-' | '_' | '.')) && cs.get(fim + 1).is_some_and(char::is_ascii_digit) {
+        return None;
+    }
     let digitos: String = cs[ini..fim].iter().collect();
     let digitos = normalizar(&digitos);
     if digitos.len() > 4 {
@@ -162,6 +168,12 @@ mod testes {
         assert_eq!(numero_do_arquivo("filme_v3_CENA_7.png", &[]), Some("7".into()));
         assert_eq!(numero_do_arquivo("SC07_take2.jpg", &[]), Some("7".into()));
         assert_eq!(numero_do_arquivo("IMG_20261013.jpg", &[]), None);
+        assert_eq!(numero_do_arquivo("IMG_2034.jpg", &[]), None);
+        assert_eq!(numero_do_arquivo("Captura de Tela 2026-10-09 à(s) 17.22.51.png", &[]), None);
+        assert_eq!(numero_do_arquivo("Screenshot 2026-10-12 at 11.04.41.png", &[]), None);
+        assert_eq!(numero_do_arquivo("2026-10-09 foto.jpg", &[]), None);
+        assert_eq!(numero_do_arquivo("041 - delegacia.jpg", &[]), Some("41".into()));
+        assert_eq!(numero_do_arquivo("41A_take2.jpg", &[]), Some("41A".into()));
         assert_eq!(numero_do_arquivo("frame.jpg", &[]), None);
     }
 
