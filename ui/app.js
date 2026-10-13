@@ -56,7 +56,7 @@ async function escolher() {
 }
 $("#soltar").addEventListener("click", escolher);
 $("#adicionarVazio").addEventListener("click", escolher);
-$("#acao").addEventListener("click", () => dialogo.message("Aqui entra o processamento do app.", { title: "Modelo" }));
+$("#acao").addEventListener("click", () => dialogo.message("Aqui entra o processamento do app.", { title: "Quadro" }));
 
 // arrastar e soltar (eventos nativos do Tauri: dão o caminho completo dos arquivos)
 window.__TAURI__.webview.getCurrentWebview().onDragDropEvent((ev) => {

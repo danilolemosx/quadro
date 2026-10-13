@@ -1,0 +1,305 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Archivo;src:url(fontes/archivo-latin-wdth-normal.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%}
+@font-face{font-family:Caveat;src:url(fontes/caveat-latin-600-normal.woff2)}
+:root{--paper:#efe5cf;--ink:#34312d;--bg:#2e2d2b;--red:#d2382f;--line:#45433f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;background:var(--bg);font-family:Archivo;color:#e9e3d6;display:grid;grid-template-rows:56px 1fr 30px;grid-template-columns:232px 1fr 320px;overflow:hidden}
+.top{grid-column:1/4;display:flex;align-items:center;gap:18px;padding:0 18px;border-bottom:1px solid var(--line);background:#262523}
+.logo{font-stretch:125%;font-weight:800;font-size:20px;letter-spacing:.04em}
+.logo span{color:var(--red)}
+.proj{font-size:13px;color:#a9a397;border-left:1px solid var(--line);padding-left:18px}
+.proj b{color:#e9e3d6;font-stretch:125%;font-weight:700;letter-spacing:.04em;margin-right:8px}
+.seg{display:flex;margin-left:auto;background:#1e1d1c;border-radius:7px;padding:3px}
+.seg div{padding:6px 14px;font-size:12px;font-weight:600;letter-spacing:.06em;color:#9c968b;border-radius:5px}
+.seg .on{background:var(--paper);color:var(--ink)}
+.btn{font-size:12px;font-weight:600;letter-spacing:.05em;padding:8px 14px;border-radius:6px;border:1px solid #57544e;color:#e9e3d6}
+.btn.red{background:var(--red);border-color:var(--red);color:#fff}
+.zoom{display:flex;align-items:center;gap:8px;font-size:11px;color:#8d877c}
+.zoom i{display:block;width:80px;height:3px;background:#555;border-radius:2px;position:relative}
+.zoom i:after{content:"";position:absolute;left:46px;top:-5px;width:13px;height:13px;border-radius:50%;background:var(--paper)}
+/* outline */
+.side{border-right:1px solid var(--line);padding:16px 0;overflow:hidden;background:#292826}
+.side h3{font-size:10px;letter-spacing:.16em;color:#8d877c;padding:0 16px 10px;font-weight:600}
+.op{margin-bottom:6px}
+.oph{display:flex;align-items:center;gap:8px;padding:6px 16px;font-size:12px;font-weight:700;font-stretch:115%;letter-spacing:.04em}
+.oph small{font-weight:400;color:#8d877c;font-stretch:100%;letter-spacing:0}
+.oph em{margin-left:auto;font-style:normal;font-size:11px;color:#8d877c;font-weight:500}
+.oph i{width:10px;height:10px;border-radius:2px}
+.op ul{list-style:none}
+.op li{display:flex;gap:7px;align-items:baseline;padding:4px 16px 4px 34px;font-size:11.5px;color:#bdb6a9;white-space:nowrap;overflow:hidden}
+.op li i{width:6px;height:6px;border-radius:50%;flex:none;transform:translateY(-1px)}
+.op li b{font-weight:700;color:#e9e3d6;min-width:50px}
+.op li span{overflow:hidden;text-overflow:ellipsis}
+.op li.on{background:#3b3936;box-shadow:inset 3px 0 var(--red)}
+/* board */
+.board{position:relative;overflow:hidden;padding:22px 24px;
+ background:
+  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .22 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>"),
+  radial-gradient(ellipse 60% 40% at 70% 95%,rgba(255,255,255,.16),transparent 70%),
+  radial-gradient(ellipse 50% 60% at 15% 10%,rgba(255,255,255,.08),transparent 70%),
+  linear-gradient(170deg,#6d7072,#55585a 45%,#4a4c4e)}
+body.cork .board{background:
+  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='4'/><feColorMatrix values='0 0 0 0 .25  0 0 0 0 .15  0 0 0 0 .05  0 0 0 .55 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>"),
+  linear-gradient(170deg,#b98a57,#a2743f)}
+.row{display:flex;gap:16px;margin-bottom:26px}
+.postit{flex:none;width:92px;height:88px;padding:8px 7px;color:#2b2722;box-shadow:0 6px 10px -4px rgba(0,0,0,.45);font-family:Caveat;line-height:1}
+.postit b{display:block;font-size:19px;white-space:nowrap;font-weight:600}
+.postit small{display:block;font-size:15px;margin-top:3px}
+.postit em{display:block;font-size:13px;font-style:normal;opacity:.7;margin-top:5px}
+.cards{display:flex;flex-wrap:wrap;gap:16px 14px;flex:1}
+.card{position:relative;width:166px;background:#fbfaf6;padding:7px 7px 9px;box-shadow:0 1px 1px rgba(0,0,0,.25),0 8px 14px -6px rgba(0,0,0,.55)}
+.card .hd{background:#0d0d0d;color:#fff;display:flex;align-items:flex-end;gap:6px;padding:4px 6px 3px;height:28px}
+.card .hd b{font-size:13px;font-weight:500;font-stretch:90%;white-space:nowrap}
+.card .hd span{font-size:6.6px;line-height:1.15;text-align:right;color:#cfcac0;flex:1;overflow:hidden;max-height:16px}
+.card .fr{height:66px;filter:sepia(.25) contrast(1.05)}
+.card .dot{position:absolute;right:9px;bottom:2px;width:6px;height:6px;border-radius:50%}
+.card.sel{outline:3px solid var(--red);outline-offset:2px;z-index:2}
+.card.sel{box-shadow:0 0 0 1px rgba(0,0,0,.2),0 18px 26px -8px rgba(0,0,0,.7)}
+.mini{position:absolute;right:-12px;top:-12px;width:58px;height:46px;background:#f6e35d;font-family:Caveat;font-size:15px;line-height:1;padding:6px;color:#3a3220;box-shadow:0 4px 8px -3px rgba(0,0,0,.5)}
+.ghost{width:166px;height:112px;border:2px dashed rgba(255,255,255,.35);display:grid;place-items:center;color:rgba(255,255,255,.6);font-size:12px;font-weight:600;letter-spacing:.06em}
+/* inspector */
+.insp{background:var(--paper);color:var(--ink);padding:20px 20px;overflow:hidden;border-left:1px solid #000}
+.insp .big{background:#0d0d0d;padding:8px;}
+.insp .big .hd{display:flex;justify-content:space-between;align-items:flex-end;color:#fff;padding:2px 2px 8px}
+.insp .big .hd b{font-size:26px;font-weight:500;font-stretch:90%}
+.insp .big .hd small{font-size:10px;color:#aaa;letter-spacing:.08em}
+.insp .big .fr{height:118px;filter:sepia(.25)}
+.lbl{font-size:9.5px;letter-spacing:.16em;font-weight:700;color:#7d7466;margin:16px 0 5px}
+.val{font-size:14px;line-height:1.35}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chips span{font-size:11px;font-weight:600;background:#e2d6bc;padding:4px 8px;border-radius:20px}
+.stat{display:flex;gap:6px}
+.stat span{flex:1;text-align:center;font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:7px 0;border:1.5px solid #cdbf9f;border-radius:5px;color:#8a7f6c}
+.stat .on{background:#4f9a5b;border-color:#4f9a5b;color:#fff}
+.tc{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.tc div{background:#e6dbc3;border-radius:5px;padding:6px 8px}
+.tc small{display:block;font-size:8.5px;letter-spacing:.14em;font-weight:700;color:#7d7466}
+.tc b{font-size:15px;font-weight:600;font-stretch:110%;font-variant-numeric:tabular-nums}
+.notes{font-family:Caveat;font-size:19px;line-height:1.15;background:#f6e35d;padding:10px 12px;transform:rotate(-1deg);box-shadow:0 4px 8px -4px rgba(0,0,0,.35);margin-top:6px}
+.foot{grid-column:1/4;display:flex;gap:22px;align-items:center;padding:0 18px;font-size:11px;color:#8d877c;border-top:1px solid var(--line);background:#262523}
+.foot b{color:#e9e3d6;font-weight:600}
+.foot .lg{margin-left:auto;display:flex;gap:14px}
+.foot .lg i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px}
+.m-aco{background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .22 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>"),radial-gradient(ellipse 60% 40% at 70% 95%,rgba(255,255,255,.16),transparent 70%),radial-gradient(ellipse 50% 60% at 15% 10%,rgba(255,255,255,.08),transparent 70%),linear-gradient(170deg,#6d7072,#55585a 45%,#4a4c4e)!important}
+.m-cork{background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='4'/><feColorMatrix values='0 0 0 0 .25  0 0 0 0 .15  0 0 0 0 .05  0 0 0 .55 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>"),linear-gradient(170deg,#b98a57,#a2743f)!important}
+.m-feltro{background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2'/><feColorMatrix values='0 0 0 0 .9  0 0 0 0 .9  0 0 0 0 .9  0 0 0 .10 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>"),radial-gradient(ellipse 70% 60% at 40% 30%,rgba(255,255,255,.05),transparent),linear-gradient(170deg,#3e4c43,#323e37)!important}
+.m-madeira{background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.004 .09' numOctaves='4' seed='3'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .2  0 0 0 0 .08  0 0 0 .55 0'/></filter><rect width='600' height='300' filter='url(%23n)'/></svg>"),linear-gradient(175deg,#caa171,#b98d5c)!important}
+.m-lousa{background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='3' seed='8'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .09 0'/></filter><rect width='400' height='400' filter='url(%23n)'/></svg>"),linear-gradient(170deg,#2f3532,#262b29)!important}
+.m-liso{background:linear-gradient(170deg,#7b7772,#6e6a65)!important}
+.matbtn{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.05em;padding:5px 12px 5px 6px;border-radius:6px;border:1px solid #57544e}
+.matbtn .sw{width:24px;height:24px;border-radius:4px;border:1px solid rgba(255,255,255,.25)}
+.pop{position:absolute;top:62px;left:640px;z-index:20;background:#262523;border:1px solid #57544e;border-radius:10px;padding:14px;box-shadow:0 24px 50px rgba(0,0,0,.6);width:384px}
+.pop h4{font-size:10px;letter-spacing:.16em;color:#8d877c;font-weight:600;margin-bottom:10px}
+.pop .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pop .t{font-size:11px;font-weight:600;letter-spacing:.04em;color:#cfc9bd}
+.pop .t div{height:62px;border-radius:6px;margin-bottom:6px;border:1px solid rgba(255,255,255,.12);position:relative}
+.pop .t div:after{content:"";position:absolute;left:14px;top:14px;width:46px;height:30px;background:#fbfaf6;box-shadow:0 4px 6px -2px rgba(0,0,0,.5);border-top:7px solid #0d0d0d;transform:rotate(-3deg)}
+.pop .t.on div{outline:2px solid var(--red);outline-offset:2px}
+.pop .t.on{color:#fff}
+.pop .opt{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #3d3b38;font-size:11.5px;color:#bdb6a9}
+.tog{width:30px;height:17px;border-radius:9px;background:var(--red);position:relative}.tog:after{content:"";position:absolute;right:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#fff}
+.tog.off{background:#55524d}.tog.off:after{right:auto;left:2px}
+.veil{position:absolute;inset:0;background:rgba(20,19,18,.62);z-index:15}
+.modal{position:absolute;z-index:20;left:250px;top:110px;width:940px;background:var(--paper);color:var(--ink);border-radius:6px;box-shadow:0 30px 70px rgba(0,0,0,.7);padding:26px 28px}
+.modal h2{font-stretch:125%;font-weight:800;font-size:22px;letter-spacing:.03em}
+.modal .sub{font-size:13px;color:#6d6457;margin-top:4px}
+.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.way{border:1.5px solid #cdbf9f;border-radius:6px;padding:16px;min-height:150px;position:relative}
+.way.on{border-color:var(--ink);background:#f7f0de;box-shadow:inset 0 0 0 1.5px var(--ink)}
+.way .n{font-stretch:125%;font-weight:800;font-size:28px;color:var(--red)}
+.way b{display:block;font-stretch:120%;font-weight:700;font-size:14px;letter-spacing:.04em;margin:6px 0 6px}
+.way p{font-size:12px;line-height:1.4;color:#5d5548}
+.way .tag{position:absolute;right:12px;top:14px;font-size:9.5px;font-weight:700;letter-spacing:.12em;background:var(--ink);color:var(--paper);padding:3px 7px;border-radius:3px}
+.cfg{display:grid;grid-template-columns:1.2fr 1fr;gap:26px;margin-top:20px;padding-top:18px;border-top:1.5px solid #ddd0b2}
+.file{display:flex;align-items:center;gap:10px;background:#e6dbc3;border-radius:5px;padding:10px 12px;font-size:12.5px}
+.file b{font-weight:700}
+.file small{margin-left:auto;color:#7d7466}
+.sl{margin-top:14px;font-size:11px;font-weight:700;letter-spacing:.12em;color:#7d7466}
+.bar{height:4px;background:#d6c9ab;border-radius:2px;margin-top:10px;position:relative}
+.bar i{position:absolute;left:0;top:0;bottom:0;width:62%;background:var(--ink);border-radius:2px}
+.bar i:after{content:"";position:absolute;right:-7px;top:-5px;width:14px;height:14px;border-radius:50%;background:var(--ink)}
+.rad{display:flex;gap:6px;margin-top:8px}
+.rad span{font-size:11px;font-weight:700;padding:6px 10px;border:1.5px solid #cdbf9f;border-radius:5px;color:#7d7466}
+.rad .on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.strip div{height:46px;border:3px solid #fff;border-top-width:7px;border-top-color:#0d0d0d;box-shadow:0 2px 4px rgba(0,0,0,.2)}
+.found{font-stretch:125%;font-weight:800;font-size:38px;line-height:1}
+.found small{display:block;font-size:11px;font-stretch:100%;font-weight:600;letter-spacing:.06em;color:#7d7466;margin-top:4px}
+.act{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}
+.act span{font-size:12px;font-weight:700;letter-spacing:.06em;padding:10px 18px;border-radius:5px;border:1.5px solid #bdb092}
+.act .go{background:var(--red);border-color:var(--red);color:#fff}
+@font-face{font-family:Courier Prime;src:url(fontes/courier-prime-latin-400-normal.woff2)}
+@font-face{font-family:Courier Prime;font-weight:700;src:url(fontes/courier-prime-latin-700-normal.woff2)}
+.m-feltro{background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='2.2 .9' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .5 -.15'/></filter><rect width='240' height='240' filter='url(%23f)'/></svg>"),url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500'><filter id='b'><feTurbulence type='fractalNoise' baseFrequency='.018' numOctaves='3' seed='2'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .45 0'/></filter><rect width='500' height='500' filter='url(%23b)'/></svg>"),linear-gradient(170deg,#3d4656,#323a48)!important}
+.m-kraft{background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='k'><feTurbulence type='fractalNoise' baseFrequency='.9 .06' numOctaves='3' seed='5'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .22  0 0 0 0 .1  0 0 0 .35 0'/></filter><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='1' seed='9'/><feColorMatrix values='0 0 0 0 .2  0 0 0 0 .12  0 0 0 0 .05  0 0 0 2.2 -1.35'/></filter><rect width='400' height='400' filter='url(%23k)'/><rect width='400' height='400' filter='url(%23s)'/></svg>"),radial-gradient(ellipse 80% 60% at 50% 40%,rgba(255,240,210,.12),transparent),linear-gradient(170deg,#d6b98d,#c9a877)!important}
+.pop{width:500px;left:560px}.pop .grid{grid-template-columns:repeat(4,1fr)}
+.pop .t div{height:56px}.pop .t div:after{left:12px;top:12px;width:40px;height:26px}
+/* lista */
+.list{background:#2b2a28;overflow:hidden;padding:18px 22px}
+.lh{display:grid;grid-template-columns:118px 92px 1fr 150px 104px 64px;gap:14px;font-size:9.5px;letter-spacing:.16em;font-weight:700;color:#8d877c;padding:0 12px 8px;border-bottom:1px solid #45433f}
+.lp{display:flex;align-items:center;gap:10px;margin:16px 0 6px;font-stretch:120%;font-weight:800;font-size:13px;letter-spacing:.05em}
+.lp i{width:16px;height:16px;border-radius:2px;transform:rotate(-4deg)}
+.lp small{font-stretch:100%;font-weight:400;color:#8d877c;letter-spacing:0;font-size:12px}
+.lp em{margin-left:auto;font-style:normal;font-size:11px;color:#8d877c;font-weight:500;letter-spacing:0}
+.lr{display:grid;grid-template-columns:118px 92px 1fr 150px 104px 64px;gap:14px;align-items:center;padding:6px 12px;border-radius:4px;font-size:12.5px;color:#d8d2c5}
+.lr:nth-child(even){background:#302f2c}
+.lr.on{background:#3d3a36;box-shadow:inset 3px 0 var(--red)}
+.th{height:50px;background:#fbfaf6;padding:3px}
+.th div{height:100%;border-top:7px solid #0d0d0d;filter:sepia(.25)}
+.lr .n{font-stretch:110%;font-weight:700;font-size:14px;color:#fff}
+.lr .ch{display:flex;gap:4px;flex-wrap:wrap}.lr .ch span{font-size:10.5px;background:#45423d;padding:2px 7px;border-radius:10px;color:#d8d2c5}
+.pill{font-size:10px;font-weight:700;letter-spacing:.05em;padding:4px 8px;border-radius:4px;color:#fff;justify-self:start}
+.lr .du{font-variant-numeric:tabular-nums;font-stretch:110%;font-weight:600;text-align:right}
+.drag{color:#6b665e;font-size:14px;letter-spacing:-2px}
+/* roteiro */
+.script{background:#2b2a28;overflow:hidden;position:relative;display:flex;justify-content:center;padding-top:26px}
+.stb{position:absolute;top:14px;left:22px;right:22px;display:flex;align-items:center;gap:10px;font-size:11px;color:#8d877c}
+.stb .btn{padding:6px 11px;font-size:11px}
+.sheet{width:600px;background:#fbf8f0;color:#1e1c1a;font-family:'Courier Prime';font-size:13.5px;line-height:1.45;padding:56px 70px 40px 96px;box-shadow:0 20px 40px rgba(0,0,0,.5);margin-top:34px;position:relative}
+.sc{position:relative;margin-bottom:22px}
+.sc.on:before{content:"";position:absolute;left:-26px;top:-6px;bottom:-6px;width:3px;background:var(--red)}
+.sc.dim{opacity:.45}
+.sh{font-weight:700;text-transform:uppercase;margin-bottom:12px}
+.mc{position:absolute;left:-170px;top:-4px;width:120px;background:#fbfaf6;padding:4px;box-shadow:0 6px 12px -4px rgba(0,0,0,.6);font-family:Archivo}
+.mc b{display:block;background:#0d0d0d;color:#fff;font-size:10.5px;font-weight:500;padding:3px 5px}
+.mc div{height:46px;filter:sepia(.25)}
+.ch2{margin-left:150px;margin-top:10px}
+.par{margin-left:110px;font-size:12.5px}
+.dl{margin-left:70px;margin-right:60px}
+.pg{position:absolute;right:20px;top:18px;font-size:12px}
+.lh,.lr{grid-template-columns:18px 118px 92px 1fr 150px 104px 54px!important}
+.hd2{color:#6b665e;font-size:15px;letter-spacing:-3px;cursor:grab}
+.lp{font-family:Caveat;font-stretch:100%;font-weight:600;font-size:21px;letter-spacing:0;color:#2b2722;display:inline-flex;padding:6px 14px 6px 10px;box-shadow:0 5px 9px -4px rgba(0,0,0,.5);margin:18px 0 8px}
+.lp small{color:#2b2722aa;font-size:17px;font-weight:400}
+.lp .hd2{color:#2b272288;font-family:Archivo;margin-right:2px}
+.lpw{display:flex;align-items:center}
+.lpw em{margin-left:auto;font-style:normal;font-size:11px;color:#8d877c}
+.lr{position:relative}
+.nt{position:absolute;right:-6px;top:4px;width:44px;height:30px;background:#f6e35d;font-family:Caveat;font-size:12px;line-height:1;padding:4px;color:#3a3220;box-shadow:0 3px 6px -2px rgba(0,0,0,.5);transform:rotate(4deg)}
+.lr.ghost2{opacity:.25}
+.lr.lift{position:absolute;z-index:9;width:820px;left:46px;background:#45423d;box-shadow:0 22px 40px -8px rgba(0,0,0,.75);transform:rotate(-1.2deg);outline:1px solid #6a665f}
+.ins{height:3px;background:var(--red);border-radius:2px;margin:3px 0;position:relative}
+.ins:before{content:"";position:absolute;left:-5px;top:-4px;width:11px;height:11px;border-radius:50%;background:var(--red)}
+.tipd{position:absolute;z-index:10;left:520px;font-size:11px;font-weight:700;letter-spacing:.06em;background:var(--red);color:#fff;padding:5px 9px;border-radius:4px}
+.ro{font-size:10px;font-weight:700;letter-spacing:.12em;border:1px solid #57544e;color:#9c968b;padding:4px 8px;border-radius:4px}
+.lh,.lr{grid-template-columns:18px 118px 92px 1fr 150px 104px 54px!important}
+.hd2{color:#6b665e;font-size:15px;letter-spacing:-3px;cursor:grab}
+.lp{font-family:Caveat;font-stretch:100%;font-weight:600;font-size:21px;letter-spacing:0;color:#2b2722;display:inline-flex;padding:6px 14px 6px 10px;box-shadow:0 5px 9px -4px rgba(0,0,0,.5);margin:18px 0 8px}
+.lp small{color:#2b2722aa;font-size:17px;font-weight:400}
+.lp .hd2{color:#2b272288;font-family:Archivo;margin-right:2px}
+.lpw{display:flex;align-items:center}
+.lpw em{margin-left:auto;font-style:normal;font-size:11px;color:#8d877c}
+.lr{position:relative}
+.nt{position:absolute;right:-6px;top:4px;width:44px;height:30px;background:#f6e35d;font-family:Caveat;font-size:12px;line-height:1;padding:4px;color:#3a3220;box-shadow:0 3px 6px -2px rgba(0,0,0,.5);transform:rotate(4deg)}
+.lr.ghost2{opacity:.25}
+.lr.lift{position:absolute;z-index:9;width:820px;left:46px;background:#45423d;box-shadow:0 22px 40px -8px rgba(0,0,0,.75);transform:rotate(-1.2deg);outline:1px solid #6a665f}
+.ins{height:3px;background:var(--red);border-radius:2px;margin:3px 0;position:relative}
+.ins:before{content:"";position:absolute;left:-5px;top:-4px;width:11px;height:11px;border-radius:50%;background:var(--red)}
+.tipd{position:absolute;z-index:10;left:520px;font-size:11px;font-weight:700;letter-spacing:.06em;background:var(--red);color:#fff;padding:5px 9px;border-radius:4px}
+.ro{font-size:10px;font-weight:700;letter-spacing:.12em;border:1px solid #57544e;color:#9c968b;padding:4px 8px;border-radius:4px}
+.lh,.lr{grid-template-columns:18px 118px 92px 1fr 150px 104px 54px!important}
+.hd2{color:#6b665e;font-size:15px;letter-spacing:-3px;cursor:grab}
+.lp{font-family:Caveat;font-stretch:100%;font-weight:600;font-size:21px;letter-spacing:0;color:#2b2722;display:inline-flex;padding:6px 14px 6px 10px;box-shadow:0 5px 9px -4px rgba(0,0,0,.5);margin:18px 0 8px}
+.lp small{color:#2b2722aa;font-size:17px;font-weight:400}
+.lp .hd2{color:#2b272288;font-family:Archivo;margin-right:2px}
+.lpw{display:flex;align-items:center}
+.lpw em{margin-left:auto;font-style:normal;font-size:11px;color:#8d877c}
+.lr{position:relative}
+.nt{position:absolute;right:-20px;top:-8px;width:44px;height:30px;background:#f6e35d;font-family:Caveat;font-size:12px;line-height:1;padding:4px;color:#3a3220;box-shadow:0 3px 6px -2px rgba(0,0,0,.5);transform:rotate(4deg)}
+.lr.ghost2{opacity:.25}
+.lr.lift{position:absolute;z-index:9;width:820px;left:46px;background:#45423d;box-shadow:0 22px 40px -8px rgba(0,0,0,.75);transform:rotate(-1.2deg);outline:1px solid #6a665f}
+.ins{height:3px;background:var(--red);border-radius:2px;margin:3px 0;position:relative}
+.ins:before{content:"";position:absolute;left:-5px;top:-4px;width:11px;height:11px;border-radius:50%;background:var(--red)}
+.tipd{position:absolute;z-index:10;right:30px;font-size:11px;font-weight:700;letter-spacing:.06em;background:var(--red);color:#fff;padding:5px 9px;border-radius:4px}
+.ro{font-size:10px;font-weight:700;letter-spacing:.12em;border:1px solid #57544e;color:#9c968b;padding:4px 8px;border-radius:4px}
+.add{width:44px;height:112px;border:2px dashed rgba(255,255,255,.4);border-radius:3px;display:grid;place-items:center;color:rgba(255,255,255,.75);font-size:26px;font-weight:300;align-self:center}
+.add.hov{background:rgba(255,255,255,.12)}
+.addp{width:92px;height:70px;border:2px dashed rgba(255,255,255,.4);display:grid;place-items:center;font-family:Caveat;font-size:20px;color:rgba(255,255,255,.8);transform:rotate(-2deg)}
+.search{display:flex;align-items:center;gap:8px;width:250px;background:#1e1d1c;border:1px solid #45433f;border-radius:6px;padding:7px 10px;font-size:12.5px;color:#7d776c}
+.search span{font-size:15px;color:#9c968b}.search kbd{margin-left:auto;font-family:Archivo;font-size:10px;border:1px solid #45433f;border-radius:3px;padding:1px 5px}
+.search.on{border-color:var(--paper);color:#fff}.search.on span{color:var(--paper)}
+.card.miss{opacity:.22;filter:grayscale(1)}
+.card.hit{box-shadow:0 0 0 3px #f6e35d,0 10px 18px -6px rgba(0,0,0,.6)}
+.card.sel.hit{box-shadow:0 0 0 3px #f6e35d,0 18px 26px -8px rgba(0,0,0,.7)}
+.op li.miss{opacity:.3}
+.sdrop{position:absolute;z-index:20;top:62px;right:180px;width:420px;background:#262523;border:1px solid #57544e;border-radius:10px;padding:14px 16px;box-shadow:0 24px 50px rgba(0,0,0,.6);font-size:12px;color:#cfc9bd}
+.sdrop h4{font-size:9.5px;letter-spacing:.16em;color:#8d877c;font-weight:600;margin:12px 0 7px}
+.sdrop h4:first-child{margin-top:0}
+.fc{display:flex;flex-wrap:wrap;gap:6px}.fc span{font-size:11px;font-weight:600;padding:5px 10px;border-radius:14px;border:1px solid #57544e}
+.fc .on{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.fc i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px}
+.res{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #3d3b38}
+.res b{font-stretch:125%;font-weight:800;font-size:20px;color:#fff}
+.res em{font-style:normal;font-size:11px;color:#8d877c}
+.tipadd{position:absolute;z-index:10;font-size:11px;font-weight:700;letter-spacing:.05em;background:var(--paper);color:var(--ink);padding:5px 9px;border-radius:4px;box-shadow:0 6px 12px rgba(0,0,0,.4)}
+.top>*{flex-shrink:0;white-space:nowrap}.proj{flex-shrink:1;overflow:hidden;text-overflow:ellipsis}.top{gap:12px}.search{width:240px;overflow:hidden}
+.card{width:156px!important}.cards{gap:16px 12px!important}.add{width:40px}
+</style></head><body style="position:relative">
+<header class="top">
+ <div class="logo">QUADR<span>O</span></div>
+ <div class="proj"><b>MEU FILME</b>corte 3 · salvo há 2 min</div>
+ <div class="seg"><div class="on">QUADRO</div><div>LISTA</div><div>ROTEIRO</div></div>
+ <div class="matbtn"><i class="sw m-aco"></i>AÇO ▾</div>
+ <div class="zoom">−<i></i>+</div>
+ <div class="btn">IMPORTAR FRAMES</div>
+ <div class="search"><span>⌕</span>Buscar cena ou personagem<kbd>⌘F</kbd></div>
+ <div class="btn red">+ CENA</div>
+</header>
+<aside class="side"><h3>ESTRUTURA</h3><div class="op"><div class="oph"><i style="background:#f28cb1"></i>PARTE 1 <small>· O sequestro</small><em>8</em></div><ul><li class=""><i style="background:#4f9a5b"></i><b>05</b><span>Mendonça mata Caio Capeta. Policiais acham cativeiro.</span></li><li class=""><i style="background:#4f9a5b"></i><b>07</b><span>Venâncio recebe um telefonema.</span></li><li class=""><i style="background:#4f9a5b"></i><b>08</b><span>Mendonça, Bosco e policiais encontram uma vala.</span></li><li class=""><i style="background:#e0a530"></i><b>09</b><span>Mendonça come com Francisco no hospital.</span></li><li class=""><i style="background:#4f9a5b"></i><b>11</b><span>Santiago chega à delegacia.</span></li><li class=""><i style="background:#4f9a5b"></i><b>15D</b><span>Paulo Gaspar chama Santiago para trabalhar na DAAS.</span></li><li class=""><i style="background:#e0a530"></i><b>19</b><span>Santiago, Ramos e Roberta falam da proposta de Gaspar.</span></li><li class=""><i style="background:#4f9a5b"></i><b>20</b><span>Francisco desacordado, aparenta melhora.</span></li></ul></div><div class="op"><div class="oph"><i style="background:#f5b98c"></i>PARTE 2 <small>· A negociação</small><em>7</em></div><ul><li class=""><i style="background:#d2382f"></i><b>28PT</b><span>OFF Kanu.</span></li><li class=""><i style="background:#4f9a5b"></i><b>31BDEG</b><span>Kanu liga para negociar sequestro.</span></li><li class=""><i style="background:#4f9a5b"></i><b>31CFH</b><span>Santiago e Roberta encontram Kanu.</span></li><li class=""><i style="background:#e0a530"></i><b>32</b><span>Sacolé joga restos de quentinha no chão para Camila.</span></li><li class=""><i style="background:#4f9a5b"></i><b>40</b><span>Roberta corta orelhões com alicate.</span></li><li class="on"><i style="background:#4f9a5b"></i><b>41</b><span>Benício impede Jailton ir na operação para realizar outro serviço.</span></li><li class=""><i style="background:#4f9a5b"></i><b>42</b><span>Mendonça lidera operação. Santiago negocia com Serginho.</span></li></ul></div><div class="op"><div class="oph"><i style="background:#7cc4ea"></i>PARTE 3 <small>· A operação</small><em>5</em></div><ul><li class=""><i style="background:#4f9a5b"></i><b>44</b><span>Jailton vê Dantas chegar.</span></li><li class=""><i style="background:#4f9a5b"></i><b>44A</b><span>Bosco e Santiago conduzem Kanu.</span></li><li class=""><i style="background:#e0a530"></i><b>45</b><span>Bosco tortura Kanu e é observado por Santiago.</span></li><li class=""><i style="background:#4f9a5b"></i><b>56</b><span>O líder da operação no cativeiro é Dantas.</span></li><li class=""><i style="background:#d2382f"></i><b>58</b><span>Malta insinua deixar Benício liderar a operação.</span></li></ul></div><div class="op closed"><div class="oph"><i style="background:#f28cb1"></i>PARTE 4<em>14</em></div></div><div class="op closed"><div class="oph"><i style="background:#b99be6"></i>PARTE 5<em>11</em></div></div><div class="op closed"><div class="oph"><i style="background:#f3e36a"></i>PARTE 6<em>9</em></div></div></aside>
+<main class="board m-aco"><section class="row"><div class="postit" style="background:#f28cb1;transform:rotate(2.6deg)"><b>PARTE 1</b><small>O sequestro</small><em>8 cenas</em></div><div class="cards"><div class="card" style="transform:translateY(-2.1px) rotate(-0.49deg)">
+<div class="hd"><b>CENA 05</b><span>Mendonça mata Caio Capeta. Policiais acham cativeiro.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 19% 70% at 69% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 11% 22% at 69% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 29% 22%, hsl(24,62%,49%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 80% 20%, hsla(34,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="card" style="transform:translateY(-2.6px) rotate(0.42deg)">
+<div class="hd"><b>CENA 07</b><span>Venâncio recebe um telefonema.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 15% 70% at 61% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 9% 22% at 61% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 27% 35%, hsl(24,57%,61%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 71% 20%, hsla(34,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="card" style="transform:translateY(-0.8px) rotate(0.10deg)">
+<div class="hd"><b>CENA 08</b><span>Mendonça, Bosco e policiais encontram uma vala.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 13% 70% at 44% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 8% 22% at 44% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 12% 44%, hsl(28,60%,61%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 54% 20%, hsla(38,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="card" style="transform:translateY(0.0px) rotate(-1.24deg)">
+<div class="hd"><b>CENA 09</b><span>Mendonça come com Francisco no hospital.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 17% 70% at 39% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 10% 22% at 39% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 51% 26%, hsl(28,47%,51%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 59% 20%, hsla(38,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#e0a530"></i><div class="mini" style="transform:rotate(-7.4deg)">trocar plano?</div></div><div class="card" style="transform:translateY(-2.6px) rotate(-0.19deg)">
+<div class="hd"><b>CENA 11</b><span>Santiago chega à delegacia.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 10% 70% at 43% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 6% 22% at 43% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 75% 51%, hsl(36,51%,64%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 10% 20%, hsla(46,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="card" style="transform:translateY(-0.5px) rotate(-1.15deg)">
+<div class="hd"><b>CENA 15D</b><span>Paulo Gaspar chama Santiago para trabalhar na DAAS.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 20% 70% at 25% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 12% 22% at 25% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 71% 25%, hsl(36,52%,62%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 43% 20%, hsla(46,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="card" style="transform:translateY(-2.3px) rotate(0.92deg)">
+<div class="hd"><b>CENA 19</b><span>Santiago, Ramos e Roberta falam da proposta de Gaspar.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 17% 70% at 59% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 10% 22% at 59% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 63% 53%, hsl(40,61%,50%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 35% 20%, hsla(50,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#e0a530"></i></div><div class="card" style="transform:translateY(0.8px) rotate(-0.77deg)">
+<div class="hd"><b>CENA 20</b><span>Francisco desacordado, aparenta melhora.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 13% 70% at 23% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 8% 22% at 23% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 24% 19%, hsl(40,47%,50%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 27% 20%, hsla(50,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="add">+</div></div></section><section class="row"><div class="postit" style="background:#f5b98c;transform:rotate(-3.6deg)"><b>PARTE 2</b><small>A negociação</small><em>7 cenas</em></div><div class="cards"><div class="card" style="transform:translateY(-0.6px) rotate(0.22deg)">
+<div class="hd"><b>CENA 28PT</b><span>OFF Kanu.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 10% 70% at 54% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 6% 22% at 54% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 17% 42%, hsl(32,59%,63%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 31% 20%, hsla(42,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#d2382f"></i></div><div class="card" style="transform:translateY(-2.7px) rotate(1.33deg)">
+<div class="hd"><b>CENA 31BDEG</b><span>Kanu liga para negociar sequestro.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 18% 70% at 71% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 11% 22% at 71% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 83% 65%, hsl(32,64%,56%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 83% 20%, hsla(42,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="card" style="transform:translateY(-1.3px) rotate(1.00deg)">
+<div class="hd"><b>CENA 31CFH</b><span>Santiago e Roberta encontram Kanu.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 11% 70% at 23% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 7% 22% at 23% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 14% 16%, hsl(32,63%,62%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 36% 20%, hsla(42,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="card" style="transform:translateY(-2.3px) rotate(-1.00deg)">
+<div class="hd"><b>CENA 32</b><span>Sacolé joga restos de quentinha no chão para Camila.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 19% 70% at 65% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 11% 22% at 65% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 66% 32%, hsl(20,66%,66%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 28% 20%, hsla(30,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#e0a530"></i><div class="mini" style="transform:rotate(-3.1deg)">som direto</div></div><div class="card" style="transform:translateY(-1.9px) rotate(0.89deg)">
+<div class="hd"><b>CENA 40</b><span>Roberta corta orelhões com alicate.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 14% 70% at 43% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 8% 22% at 43% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 32% 45%, hsl(20,55%,63%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 53% 20%, hsla(30,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="card sel" style="transform:translateY(0.8px) rotate(0.23deg)">
+<div class="hd"><b>CENA 41</b><span>Benício impede Jailton ir na operação para realizar outro serviço.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 11% 70% at 44% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 7% 22% at 44% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 44% 55%, hsl(32,52%,56%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 12% 20%, hsla(42,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="card" style="transform:translateY(0.3px) rotate(-0.36deg)">
+<div class="hd"><b>CENA 42</b><span>Mendonça lidera operação. Santiago negocia com Serginho.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 10% 70% at 26% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 6% 22% at 26% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 68% 55%, hsl(24,48%,62%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 46% 20%, hsla(34,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="add">+</div></div></section><section class="row"><div class="postit" style="background:#7cc4ea;transform:rotate(0.0deg)"><b>PARTE 3</b><small>A operação</small><em>5 cenas</em></div><div class="cards"><div class="card" style="transform:translateY(-1.8px) rotate(-1.23deg)">
+<div class="hd"><b>CENA 44</b><span>Jailton vê Dantas chegar.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 16% 70% at 44% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 10% 22% at 44% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 27% 70%, hsl(24,57%,49%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 36% 20%, hsla(34,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="card" style="transform:translateY(-0.4px) rotate(0.51deg)">
+<div class="hd"><b>CENA 44A</b><span>Bosco e Santiago conduzem Kanu.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 17% 70% at 28% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 10% 22% at 28% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 53% 35%, hsl(20,57%,59%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 78% 20%, hsla(30,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="card" style="transform:translateY(0.5px) rotate(-0.52deg)">
+<div class="hd"><b>CENA 45</b><span>Bosco tortura Kanu e é observado por Santiago.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 17% 70% at 59% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 10% 22% at 59% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 64% 69%, hsl(32,60%,56%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 68% 20%, hsla(42,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#e0a530"></i><div class="mini" style="transform:rotate(-0.7deg)">encurtar</div></div><div class="card" style="transform:translateY(1.8px) rotate(-0.56deg)">
+<div class="hd"><b>CENA 56</b><span>O líder da operação no cativeiro é Dantas.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 15% 70% at 70% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 9% 22% at 70% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 71% 38%, hsl(24,53%,49%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 49% 20%, hsla(34,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#4f9a5b"></i></div><div class="card" style="transform:translateY(-1.5px) rotate(0.56deg)">
+<div class="hd"><b>CENA 58</b><span>Malta insinua deixar Benício liderar a operação.</span></div>
+<div class="fr" style="background:radial-gradient(ellipse 11% 70% at 72% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 7% 22% at 72% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 47% 64%, hsl(20,57%,61%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 75% 20%, hsla(30,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div><i class="dot" style="background:#d2382f"></i></div><div class="add">+</div></div></section><section class="row"><div class="addp">+ PARTE</div></section></main>
+<aside class="insp">
+ <div class="big"><div class="hd"><b>CENA 41</b><small>PARTE 2 · 6/7</small></div><div class="fr" style="background:radial-gradient(ellipse 11% 70% at 44% 85%, rgba(8,6,4,.92) 60%, transparent 62%),radial-gradient(ellipse 7% 22% at 44% 38%, rgba(10,8,6,.9) 60%, transparent 63%),radial-gradient(circle at 44% 55%, hsl(32,52%,56%) 0%, rgba(60,40,20,.5) 28%, transparent 55%),radial-gradient(circle at 12% 20%, hsla(42,40%,40%,.5) 0%, transparent 40%),linear-gradient(180deg,#2a2016,#120d09)"></div></div>
+ <div class="lbl">RESUMO</div>
+ <div class="val">Benício impede Jailton ir na operação para realizar outro serviço.</div>
+ <div class="lbl">PERSONAGENS</div>
+ <div class="chips"><span>Benício</span><span>Jailton</span><span>+</span></div>
+ <div class="lbl">STATUS</div>
+ <div class="stat"><span class="on">MONTADA</span><span>EM AJUSTE</span><span>FALTA</span></div>
+ <div class="lbl">NO AVID</div>
+ <div class="tc"><div><small>ENTRADA</small><b>00:41:12</b></div><div><small>SAÍDA</small><b>00:42:54</b></div><div><small>DURAÇÃO</small><b>1:42</b></div></div>
+ <div class="lbl">NOTAS</div>
+ <div class="notes">Testar começar no close do Jailton. Ver com a direção se a foto aparece antes.</div>
+</aside>
+<footer class="foot"><span><b>143</b> cenas</span><span><b>6</b> partes</span><span>duração estimada <b>1h52</b></span>
+ <span class="lg"><span><i style="background:#4f9a5b"></i>Montada</span><span><i style="background:#e0a530"></i>Em ajuste</span><span><i style="background:#d2382f"></i>Falta material</span></span></footer>
+</body></html>

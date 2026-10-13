@@ -1,9 +1,9 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Modelo",
-  "mainBinaryName": "modelo",
+  "productName": "Quadro",
+  "mainBinaryName": "quadro",
   "version": "0.1.0",
-  "identifier": "com.danilolemos.modelo",
+  "identifier": "com.danilolemos.quadro",
   "build": {
     "frontendDist": "../ui"
   },
@@ -11,7 +11,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "Modelo",
+        "title": "Quadro",
         "width": 1100,
         "height": 760,
         "minWidth": 900,
@@ -27,7 +27,7 @@
     "active": true,
     "targets": ["app", "dmg", "msi", "nsis"],
     "category": "Video",
-    "shortDescription": "Modelo de app desktop",
+    "shortDescription": "Quadro de cenas para montadores",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",

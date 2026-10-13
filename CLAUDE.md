@@ -1,6 +1,7 @@
 # Como trabalhar neste projeto
 
-Modelo de app desktop do Danilo (editor de vídeo, Avid Media Composer), baseado no Decanta
+**Quadro**: quadro de cenas para montadores (ficha em `docs/QUADRO-ESPEC.md`, telas aprovadas em `docs/telas/`).
+Feito a partir do modelo de app desktop do Danilo (editor de vídeo, Avid Media Composer), baseado no Decanta
 (github.com/danilolemosx/tratamento-audio-app). O processo completo está em `docs/processo.md`. Leia antes de começar.
 
 ## Conversa

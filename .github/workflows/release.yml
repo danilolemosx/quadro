@@ -58,7 +58,7 @@ jobs:
           tauriScript: tauri
           args: ${{ matrix.args }}
           tagName: ${{ github.event.release.tag_name }}
-          releaseName: "Modelo ${{ github.event.release.tag_name }}"
+          releaseName: "Quadro ${{ github.event.release.tag_name }}"
           releaseDraft: false
           prerelease: false
       - name: Guardar instaladores como artefato (execução manual)

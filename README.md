@@ -1,6 +1,7 @@
-# Modelo de app desktop (Mac e Windows)
+# Quadro (Mac e Windows)
 
-Ponto de partida para os apps do Danilo, com o que funcionou no **Decanta**:
+O **quadro de cenas** de um filme: um cartão por cena (frame, número e resumo), organizado em partes, com
+visões de Quadro, Lista e Roteiro. Feito a partir do modelo de app desktop do Danilo (receita do **Decanta**):
 
 - **Tauri v2**: um app leve para Mac (Apple Silicon e Intel) e Windows, com a lógica em Rust.
 - **`motor/`**: a lógica do app, testável sozinha, com uma linha de comando (`motor-cli`).
