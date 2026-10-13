@@ -36,8 +36,18 @@ fn numero_no_inicio(s: &str) -> Option<(String, &str)> {
     if num.is_empty() {
         num = "0".into();
     }
-    // sufixo de uma ou duas letras: 41A, 41-A, 41AB (seguido de separador)
+    // sufixo de uma ou duas letras: 41A, 41-A, 41 A, 41AB (seguido de separador)
     let r2 = resto.strip_prefix('-').unwrap_or(resto);
+    if let Some(sem_espaco) = r2.strip_prefix(' ') {
+        // "10 A EXT. …": uma letra sozinha depois do espaço é o sufixo da cena
+        let mut cs = sem_espaco.chars();
+        if let (Some(l), depois) = (cs.next(), cs.as_str()) {
+            if l.is_ascii_uppercase() && (depois.is_empty() || depois.starts_with([' ', '.', '-', '–', '—', ':'])) {
+                num.push(l);
+                return Some((num, depois));
+            }
+        }
+    }
     let letras: String = r2.chars().take_while(|c| c.is_ascii_alphabetic()).collect();
     if (1..=2).contains(&letras.len()) {
         let depois = &r2[letras.len()..];
@@ -74,6 +84,11 @@ fn quase_tudo_maiusculo(s: &str) -> bool {
 /// Tira um número repetido no fim ("INT. RUA – DIA 41").
 fn numero_no_fim(s: &str) -> (Option<String>, String) {
     let t = s.trim_end();
+    // "… DIA 10 A": número e letra separados no fim
+    let palavras: Vec<&str> = t.rsplitn(3, char::is_whitespace).collect();
+    if palavras.len() == 3 && palavras[0].len() == 1 && palavras[0].chars().all(|c| c.is_ascii_uppercase()) && !palavras[1].is_empty() && palavras[1].chars().all(|c| c.is_ascii_digit()) && palavras[1].len() <= 4 {
+        return (Some(format!("{}{}", palavras[1].trim_start_matches('0'), palavras[0])), palavras[2].trim_end().to_string());
+    }
     if let Some(pos) = t.rfind(char::is_whitespace) {
         if let Some((n, resto)) = numero_no_inicio(t[pos..].trim()) {
             if resto.trim_matches(|c: char| c == '.' || c == '*').is_empty() {
@@ -109,10 +124,11 @@ pub fn analisar(linha: &str) -> Option<(Option<String>, String)> {
             return None;
         }
     }
-    // "41 INT. …" / "41. EXT. …"
+    // "41 INT. …" / "41. EXT. …" / "5 STOCKSHOT NOITE EM JERUSALÉM" (número + texto em maiúsculas)
     if let Some((n, resto)) = numero_no_inicio(s) {
         let resto = sem_separadores(resto);
-        if eh_local(resto) && quase_tudo_maiusculo(resto) {
+        let letras = resto.chars().filter(|c| c.is_alphabetic()).count();
+        if (eh_local(resto) || letras >= 4) && quase_tudo_maiusculo(resto) {
             let (_, texto) = numero_no_fim(resto);
             return Some((Some(n), texto));
         }
@@ -174,6 +190,12 @@ mod testes {
         assert_eq!(n("I/E CARRO - NOITE"), Some((None, "I/E CARRO - NOITE".into())));
         assert_eq!(n("INTERIOR. CASA – NOITE 3"), com("3", "INTERIOR. CASA – NOITE"));
         assert_eq!(n("*41 INT. DELEGACIA – DIA*"), com("41", "INT. DELEGACIA – DIA*"));
+        assert_eq!(n("10 A EXT. GALILEIA. MAR - NOITE"), com("10A", "EXT. GALILEIA. MAR - NOITE"));
+        assert_eq!(n("10 A. EXT. GALILEIA - DIA 10 A"), com("10A", "EXT. GALILEIA - DIA"));
+        assert_eq!(n("EXT. GALILEIA - DIA 10 A"), com("10A", "EXT. GALILEIA - DIA"));
+        assert_eq!(n("CENA 10 A – INT. CASA"), com("10A", "INT. CASA"));
+        assert_eq!(n("5 STOCKSHOT NOITE EM JERUSALÉM"), com("5", "STOCKSHOT NOITE EM JERUSALÉM"));
+        assert_eq!(n("5. STOCKSHOT - NOITE EM JERUSALÉM 5"), com("5", "STOCKSHOT - NOITE EM JERUSALÉM"));
     }
 
     #[test]
@@ -182,6 +204,10 @@ mod testes {
             "Benício entra na delegacia.",
             "Interior da casa, tudo escuro.",
             "41 anos depois.",
+            "3 homens entram na sala.",
+            "12.",
+            "38.",
+            "2 OK",
             "Na cena 41 ele volta.",
             "CENÁRIO: uma rua",
             "CORTA PARA:",
