@@ -6,44 +6,53 @@
   <title>Quadro</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <header class="topo">
-    <div class="marca">QUADR<span>O</span></div>
-    <div class="subtitulo">descreva o app<br>em duas linhas</div>
-    <span class="espaco"></span>
+<body class="sem-projeto">
+  <header class="top">
+    <div class="logo">QUADR<span>O</span></div>
+    <div class="proj"><b id="pNome" title="Duplo clique para renomear"></b><span id="pCorte" title="Duplo clique para editar o corte"></span><span id="pSalvo"></span></div>
+    <div class="seg" id="vistas">
+      <button data-vista="quadro" class="on">QUADRO</button><button data-vista="lista">LISTA</button><button data-vista="roteiro">ROTEIRO</button>
+    </div>
+    <button class="matbtn" id="matBtn"><i class="sw m-aco" id="matSw"></i><span id="matNome">AÇO</span> ▾</button>
+    <div class="zoom"><button id="zoomMenos">−</button><input id="zoom" type="range" min="0.6" max="1.8" step="0.05" value="1"><button id="zoomMais">+</button></div>
+    <button class="btn" id="btnImportar">IMPORTAR FRAMES</button>
+    <label class="search" id="busca"><span>⌕</span><input id="buscaTexto" placeholder="Buscar cena ou personagem" autocomplete="off" spellcheck="false"><kbd>⌘F</kbd></label>
+    <button class="btn red" id="btnCena">+ CENA</button>
   </header>
 
-  <main class="corpo">
-    <section class="bilhete">
-      <div id="vazio" class="vazio">
-        <b>ARRASTE SEUS WAVS</b>
-        <span>para a fila ao lado, ou</span>
-        <button id="adicionarVazio" class="botao-tinta">+ ADICIONAR WAVS…</button>
-      </div>
-      <div id="detalhe" class="miolo oculto">
-        <div class="cabecalho">
-          <div class="campo nome"><span class="rot">Arquivo</span><b id="dNome"></b></div>
-          <div class="campo"><span class="rot">Taxa</span><b id="dTaxa" class="tab"></b></div>
-          <div class="campo"><span class="rot">Canais</span><b id="dCanais" class="tab"></b></div>
-          <div class="campo"><span class="rot">Duração</span><b id="dDuracao" class="tab"></b></div>
-        </div>
-        <div class="grande"><span class="rot">Pico</span><b id="dPico" class="tab"></b></div>
-        <div id="dAvisos" class="avisos"></div>
-      </div>
-    </section>
+  <aside class="side" id="estrutura"></aside>
 
-    <section class="coluna">
-      <h3>FILA <span id="contagem">00</span></h3>
-      <div id="lista" class="lista"></div>
-      <button id="soltar" class="soltar"><b>+ WAVS</b>arraste aqui ou clique</button>
-    </section>
+  <main class="centro" id="centro">
+    <div class="board m-aco" id="vQuadro"><div class="rows" id="rows"></div></div>
+    <div class="list oculto" id="vLista"></div>
+    <div class="script oculto" id="vRoteiro"></div>
   </main>
 
-  <footer class="rodape">
-    <span class="espaco"></span>
-    <button id="acao" class="principal" disabled>PROCESSAR<small id="resumo">NADA NA FILA</small></button>
-  </footer>
+  <aside class="insp" id="ficha"></aside>
 
+  <footer class="foot" id="rodape"></footer>
+
+  <!-- janelas e menus flutuantes -->
+  <div class="pop oculto" id="popMaterial"></div>
+  <div class="pop popBusca oculto" id="popBusca"></div>
+  <div class="ctx oculto" id="ctx"></div>
+  <div class="veil oculto" id="veil"></div>
+  <div class="modal oculto" id="modal"></div>
+  <div class="inicio" id="inicio"></div>
+  <div class="tipd oculto" id="dica"></div>
+  <div class="ins-v oculto" id="insV"></div>
+  <div class="ins-h oculto" id="insH"></div>
+  <div class="aviso oculto" id="aviso"></div>
+
+  <script src="ponte.js"></script>
+  <script src="estado.js"></script>
+  <script src="arrastar.js"></script>
+  <script src="quadro.js"></script>
+  <script src="lista.js"></script>
+  <script src="roteiro.js"></script>
+  <script src="ficha.js"></script>
+  <script src="busca.js"></script>
+  <script src="importar.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
