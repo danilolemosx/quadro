@@ -1,5 +1,12 @@
 # QUADRO — ficha do app (v0.1)
 
+> **Mudanças pedidas pelo Danilo (13/10/2026), valem sobre o resto da ficha:**
+> 1. **Sem marcadores do Avid.** O caminho "Do Avid" sai da janela Importar frames. Importar = **imagens** e
+>    **PDF do roteiro**. Os campos Entrada/Saída/Duração da ficha da cena continuam, preenchidos à mão.
+> 2. **App genérico, para qualquer projeto.** Nada de dados de um filme específico no app: abre com
+>    Novo projeto / Abrir / Recentes; nomes de partes, personagens etc. vêm do projeto. A detecção de cenas
+>    do roteiro deve ser tolerante a formatos diferentes de PDF.
+
 App de Mac (e Windows, pelo mesmo CI) para montar o **quadro de cenas** de um filme: um cartão por cena, com
 frame, número e resumo, organizado em partes. É a versão digital do quadro físico (cartões impressos com tarja
 preta e post-its numa chapa de aço). A estrutura vem do Manuskript: estrutura à esquerda, quadro no centro e
@@ -70,18 +77,12 @@ imagens externas.
   DIA", "CENA 41", "INT./EXT.").
 
 ### Importar frames (`telas/quadro-3-importar-frames.png`)
-Janela com 3 caminhos:
+Janela com 2 caminhos (o "Do Avid" saiu):
 1. **De um vídeo**: fica **desligado na v0.1**, com o selo "EM BREVE" (é a v0.2).
 2. **Arrastar imagens**: soltar vários JPG/PNG/TIFF. Se o nome do arquivo tiver o número ("CENA 41.jpg",
    "41.png", "cena_31BDEG.jpg"), o frame vai para o cartão certo (cria o cartão se não existir). Os que não
    batem ficam numa fila "sem cena" para o Danilo arrastar.
-3. **Do Avid**: lista de **marcadores** exportada do Avid (.txt da janela Markers). Cada marcador cujo nome ou
-   comentário tenha "CENA n" vira ou atualiza a cena n, com **Entrada** = TC do marcador, **Saída** = TC do
-   próximo marcador e **Duração** = diferença. Na v0.1 o frame vem de imagens soltas; o frame tirado do vídeo
-   de referência chega na v0.2.
-   → **Pedir ao Danilo um .txt de marcadores real** antes de escrever o leitor. O formato do Avid pode variar,
-   então o leitor deve ser tolerante (achar a coluna de timecode e o texto "CENA").
-   Timecode: 23,976 / 24 / 25 / 29,97 NDF/DF / 30, como no Decanta.
+
 
 ### Busca (`telas/quadro-7-busca.png`)
 - Campo na barra de cima (⌘F). Procura em número, resumo, personagens e notas.
@@ -136,8 +137,8 @@ Cores dos post-its de parte: rosa #f28cb1, pêssego #f5b98c, azul #7cc4ea, lilá
 - **"Ponte" única:** toda chamada nativa (abrir/salvar pasta, ler arquivo, copiar imagem, diálogos) passa por
   um só módulo, `ui/ponte.js`. O resto da interface não fala com o Tauri direto. Assim o site, no futuro, troca só a ponte.
 - O motor em Rust (`motor/`) fica pequeno na v0.1: ler/gravar o projeto (com gravação segura: arquivo temporário
-  e depois renomear), copiar e redimensionar frames (miniatura para o quadro + original para a ficha), ler
-  marcadores do Avid e calcular timecode. Com testes, como de costume.
+  e depois renomear), copiar e redimensionar frames (miniatura para o quadro + original para a ficha) e
+  calcular timecode. Com testes, como de costume.
 - Arrastar do Finder: `getCurrentWebview().onDragDropEvent` (dá o caminho completo).
 - PDF: pdf.js empacotado no app, sem depender de internet.
 - Fontes (OFL, empacotadas, sem internet): **Archivo** variável com largura (títulos em maiúsculas, largura

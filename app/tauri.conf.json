@@ -12,20 +12,31 @@
     "windows": [
       {
         "title": "Quadro",
-        "width": 1100,
-        "height": 760,
-        "minWidth": 900,
-        "minHeight": 600,
+        "width": 1440,
+        "height": 900,
+        "minWidth": 1100,
+        "minHeight": 700,
         "dragDropEnabled": true
       }
     ],
     "security": {
-      "csp": "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src ipc: http://ipc.localhost"
+      "csp": "default-src 'self'; img-src 'self' data: blob: asset: http://asset.localhost; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self'; worker-src 'self' blob:; connect-src ipc: http://ipc.localhost asset: http://asset.localhost",
+      "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "**"
+        ]
+      }
     }
   },
   "bundle": {
     "active": true,
-    "targets": ["app", "dmg", "msi", "nsis"],
+    "targets": [
+      "app",
+      "dmg",
+      "msi",
+      "nsis"
+    ],
     "category": "Video",
     "shortDescription": "Quadro de cenas para montadores",
     "icon": [
@@ -40,8 +51,14 @@
       "minimumSystemVersion": "10.15"
     },
     "windows": {
-      "wix": { "language": "pt-BR" },
-      "nsis": { "languages": ["PortugueseBR"] }
+      "wix": {
+        "language": "pt-BR"
+      },
+      "nsis": {
+        "languages": [
+          "PortugueseBR"
+        ]
+      }
     }
   }
 }
