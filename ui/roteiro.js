@@ -183,6 +183,7 @@ const Roteiro = (() => {
         novo.innerHTML = htmlMargem(cab);
         el.querySelector(".mc").replaceWith(novo.firstChild);
       }
+      empilharMargem(v);
       marcarSelecao();
       return;
     }
@@ -203,7 +204,21 @@ const Roteiro = (() => {
     }).join("")}</div>`).join("");
     v.innerHTML = `${topo()}<div class="sheets">${paginas}</div>`;
     montado = chave;
+    empilharMargem(v);
     marcarSelecao(true);
+  }
+
+  /** Cartões da margem de cenas curtas não se sobrepõem: cada um desce até ficar abaixo do anterior. */
+  function empilharMargem(v) {
+    let fim = -Infinity, folha = null;
+    for (const mc of $$(".mc", v)) {
+      const ln = mc.parentElement;
+      if (ln.parentElement !== folha) { folha = ln.parentElement; fim = -Infinity; }
+      mc.style.top = "";
+      let topo = ln.offsetTop - 4;
+      if (topo < fim + 6) { topo = fim + 6; mc.style.top = `${topo - ln.offsetTop}px`; }
+      fim = topo + mc.offsetHeight;
+    }
   }
 
   /** Barra vermelha na cena selecionada e as outras apagadas. */

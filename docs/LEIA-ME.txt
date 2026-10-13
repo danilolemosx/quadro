@@ -1,0 +1,61 @@
+QUADRO 0.1.0 — o quadro de cenas do seu filme
+=============================================
+
+O QUE É
+O quadro de cenas da montagem, no computador: um cartão por cena, com frame, número e resumo,
+organizado em partes, como os cartões e post-its na chapa de aço. Funciona sem internet.
+
+
+COMO USAR
+1. Abra o Quadro, dê um nome ao projeto e escolha onde guardar (ele cria a pasta "Nome.quadro").
+2. Crie cenas com "+ CENA" ou com o "+" no fim de cada fileira. Crie partes com "+ Parte".
+3. Arraste imagens para o quadro: "CENA 41.jpg" vai direto para o cartão 41 (o cartão é criado se faltar).
+4. Na aba ROTEIRO, importe o PDF do roteiro: o Quadro acha as cenas e põe os cartões na margem.
+5. Clique num cartão para editar a ficha à direita. Arraste cartões, partes e post-its para reorganizar.
+   Botão direito num cartão: post-it, trocar frame, apagar.
+
+Atalhos: ⌘F busca · ⌘Z desfaz · ⇧⌘Z refaz · ⌘1/2/3 Quadro, Lista, Roteiro · setas mudam de cena ·
+Enter edita o resumo · Delete apaga a cena. Salva sozinho.
+Para levar o projeto para outro computador, copie a pasta "Nome.quadro" inteira.
+
+
+QUAL ARQUIVO BAIXAR
+- Mac com chip Apple (M1, M2, M3, M4): Quadro_0.1.0_aarch64.dmg
+- Mac com processador Intel:          Quadro_0.1.0_x64.dmg
+- Windows 10/11:                      Quadro_0.1.0_x64-setup.exe
+
+Não sabe qual é o seu Mac? Menu Apple () > Sobre Este Mac.
+"Chip Apple M..." = aarch64. "Processador Intel" = x64.
+
+
+INSTALAR NO MAC
+Abra o .dmg e arraste o Quadro para a pasta Aplicativos.
+O app não é assinado pela Apple, então o Mac reclama na primeira vez. É normal:
+
+> "O Quadro não pode ser aberto" / "Apple não pôde verificar…"
+  1. Tente abrir o app uma vez e clique em OK.
+  2. Vá em Ajustes do Sistema > Privacidade e Segurança.
+  3. No fim da página, clique em "Abrir Mesmo Assim" e confirme com a senha.
+
+> "O Quadro está danificado e não pode ser aberto"
+  Não está danificado: é o bloqueio do macOS para arquivos baixados.
+  1. Copie o app para Aplicativos.
+  2. Abra o Terminal (Aplicativos > Utilitários > Terminal), cole e aperte Enter:
+       xattr -cr /Applications/Quadro.app
+  3. Abra o app de novo.
+
+> O app não abre ou fecha sozinho
+  Confira se baixou o .dmg certo (aarch64 para chip Apple, x64 para Intel).
+
+
+INSTALAR NO WINDOWS
+> "O Windows protegeu o computador" (SmartScreen)
+  Clique em "Mais informações" e depois em "Executar assim mesmo".
+
+> O navegador bloqueia o download
+  Nos downloads, clique nos três pontinhos ao lado do arquivo e escolha "Manter".
+
+
+BAIXANDO DO GOOGLE DRIVE
+"O Google Drive não pode verificar este arquivo quanto a vírus": é só pelo tamanho.
+Clique em "Fazer o download assim mesmo".
