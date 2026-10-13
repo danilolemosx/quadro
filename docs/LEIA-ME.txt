@@ -2,21 +2,9 @@ QUADRO 0.1.1 — o quadro de cenas do seu filme
 =============================================
 
 O QUE É
-O quadro de cenas da montagem, no computador: um cartão por cena, com frame, número e resumo,
-organizado em partes, como os cartões e post-its na chapa de aço. Funciona sem internet.
-
-
-COMO USAR
-1. Abra o Quadro, dê um nome ao projeto e escolha onde guardar (ele cria a pasta "Nome.quadro").
-2. Crie cenas com "+ CENA" ou com o "+" no fim de cada fileira. Crie partes com "+ Parte".
-3. Arraste imagens para o quadro: "CENA 41.jpg" vai direto para o cartão 41 (o cartão é criado se faltar).
-4. Na aba ROTEIRO, importe o PDF do roteiro: o Quadro acha as cenas e põe os cartões na margem.
-5. Clique num cartão para editar a ficha à direita. Arraste cartões, partes e post-its para reorganizar.
-   Botão direito num cartão: post-it, trocar frame, apagar.
-
-Atalhos: ⌘F busca · ⌘Z desfaz · ⇧⌘Z refaz · ⌘1/2/3 Quadro, Lista, Roteiro · setas mudam de cena ·
-Enter edita o resumo · Delete apaga a cena. Salva sozinho.
-Para levar o projeto para outro computador, copie a pasta "Nome.quadro" inteira.
+O quadro de cenas da montagem, no computador: um cartão por cena (frame, número e resumo), organizado
+em partes, como os cartões e post-its presos na chapa de aço da ilha de edição. Serve para qualquer
+filme ou série. Funciona sem internet. Mac e Windows.
 
 
 QUAL ARQUIVO BAIXAR
@@ -27,8 +15,17 @@ QUAL ARQUIVO BAIXAR
 Não sabe qual é o seu Mac? Menu Apple () > Sobre Este Mac.
 "Chip Apple M..." = aarch64. "Processador Intel" = x64.
 
+Links diretos:
+https://github.com/danilolemosx/quadro/releases/download/v0.1.1/Quadro_0.1.1_aarch64.dmg
+https://github.com/danilolemosx/quadro/releases/download/v0.1.1/Quadro_0.1.1_x64.dmg
+https://github.com/danilolemosx/quadro/releases/download/v0.1.1/Quadro_0.1.1_x64-setup.exe
 
-INSTALAR NO MAC
+
+==============================
+INSTALAR
+==============================
+
+NO MAC
 Abra o .dmg e arraste o Quadro para a pasta Aplicativos.
 O app não é assinado pela Apple, então o Mac reclama na primeira vez. É normal:
 
@@ -47,15 +44,179 @@ O app não é assinado pela Apple, então o Mac reclama na primeira vez. É norm
 > O app não abre ou fecha sozinho
   Confira se baixou o .dmg certo (aarch64 para chip Apple, x64 para Intel).
 
+> Atualizar para uma versão nova
+  Feche o Quadro, arraste o novo para Aplicativos e escolha "Substituir".
+  Seus projetos não são afetados (ficam nas pastas .quadro, não dentro do app).
 
-INSTALAR NO WINDOWS
+NO WINDOWS
 > "O Windows protegeu o computador" (SmartScreen)
   Clique em "Mais informações" e depois em "Executar assim mesmo".
 
 > O navegador bloqueia o download
   Nos downloads, clique nos três pontinhos ao lado do arquivo e escolha "Manter".
 
-
 BAIXANDO DO GOOGLE DRIVE
 "O Google Drive não pode verificar este arquivo quanto a vírus": é só pelo tamanho.
 Clique em "Fazer o download assim mesmo".
+
+
+==============================
+COMEÇAR
+==============================
+
+1. Abra o Quadro, digite o nome do projeto e clique em CRIAR PROJETO…
+2. Escolha onde guardar. O Quadro cria uma pasta "Nome.quadro" com tudo dentro:
+   o projeto, os frames (cópias das imagens) e o roteiro.
+3. Da próxima vez, o Quadro reabre o último projeto sozinho.
+   Outros projetos: menu Arquivo > Abrir projeto… (escolha a pasta .quadro) ou Abrir recente.
+
+Dica: guarde a pasta .quadro num lugar com backup (Drive, servidor). Para levar o projeto para outro
+computador, copie a pasta inteira.
+
+
+==============================
+A TELA
+==============================
+
+ESQUERDA — ESTRUTURA: as partes e as cenas. Clique numa cena para selecionar; clique no nome da parte
+para abrir ou fechar.
+
+CENTRO — três visões (botões no alto, ou ⌘1 / ⌘2 / ⌘3):
+  QUADRO   os cartões, uma fileira por parte, com o post-it da parte à esquerda.
+  LISTA    as mesmas cenas em tabela (frame, cena, resumo, personagens, status, duração).
+  ROTEIRO  o PDF do roteiro, com o cartão de cada cena na margem. Só leitura.
+
+DIREITA — FICHA DA CENA: frame grande, número, resumo, personagens, status, entrada/saída/duração
+e notas. Tudo se edita direto ali.
+
+RODAPÉ: total de cenas, partes e duração estimada (soma das durações).
+
+
+==============================
+O DIA A DIA
+==============================
+
+CRIAR
+- Cena nova: botão "+ CENA" (entra depois da cena selecionada) ou o "+" tracejado no fim de cada fileira.
+- Parte nova: "+ Parte" depois da última parte.
+
+EDITAR UMA CENA (na ficha, à direita)
+- Número: clique no número depois de "CENA" no topo preto, digite e aperte Enter.
+- Resumo: é o texto que aparece pequeno no cartão. Duplo clique no cartão (ou Enter) vai direto para ele.
+- Personagens: clique no "+", digite o nome e aperte Enter (sugere os que já existem). Para tirar, passe
+  o mouse no nome e clique no ×.
+- Status: Montada (verde), Em ajuste (amarelo), Falta (vermelho). Clique de novo para tirar.
+- Entrada / Saída: digite o timecode (pode ser abreviado: "41:12" vira 00:41:12:00). A duração é calculada
+  sozinha. A taxa de quadros (23,976 etc.) fica ao lado de "NO AVID".
+- Notas: o post-it amarelo.
+
+EDITAR UMA PARTE
+Duplo clique (ou botão direito) no post-it da parte: nome, título, cor e "Apagar parte".
+
+ORGANIZAR (arrastar)
+- Cartões e linhas da Lista: mudam de lugar e de parte. A linha vermelha mostra onde vai cair.
+- Post-it da parte: move a parte inteira.
+- Post-its pequenos (notas rápidas) podem ir de um cartão para outro.
+
+POST-ITS NOS CARTÕES
+Botão direito no cartão > "Novo post-it no cartão" (ou "+ post-it no cartão" na ficha).
+Duplo clique para editar; Enter para terminar. Botão direito no post-it: cor ou apagar.
+Post-it vazio some sozinho.
+
+BOTÃO DIREITO NO CARTÃO
+Novo post-it, trocar frame, tirar frame, nova cena depois desta, apagar cena.
+
+
+==============================
+FRAMES (IMAGENS DOS CARTÕES)
+==============================
+
+- Uma imagem: arraste do Finder (ou Explorer) direto para o cartão, ou para o frame grande da ficha.
+- Várias de uma vez: solte no quadro ou use "IMPORTAR FRAMES". Se o nome do arquivo tiver o número da
+  cena, ela vai para o cartão certo:
+     "CENA 41.jpg", "41.png", "SC07.jpg", "cena_12A.tif"
+  Se o cartão não existir, ele é criado.
+- Imagens sem número no nome (ou com data, como "Captura de Tela 2026-…") ficam na fila "SEM CENA",
+  embaixo do quadro. Arraste cada uma para o cartão certo.
+- Soltar imagens no "+" de uma fileira cria uma cena nova para cada imagem.
+- Formatos: JPG, PNG, TIFF, WebP. O Quadro guarda uma cópia dentro do projeto (o arquivo original pode
+  ser apagado ou mudar de lugar).
+
+"De um vídeo" (tirar os frames automaticamente do filme) chega numa próxima versão.
+
+
+==============================
+ROTEIRO
+==============================
+
+1. Aba ROTEIRO > IMPORTAR PDF (ou arraste o PDF para a janela, ou menu Arquivo > Importar roteiro).
+2. O Quadro acha os cabeçalhos de cena e liga cada um ao cartão de mesmo número. Exemplos que ele entende:
+     "41 INT. DELEGACIA – DIA"     "CENA 41 – EXT. RUA"     "10 A EXT. GALILEIA"
+     "5 STOCKSHOT NOITE EM JERUSALÉM"     "INT./EXT. CARRO – NOITE"
+3. Se houver cenas no roteiro que não estão no quadro, ele pergunta se quer criar.
+4. Clique numa cena do roteiro para selecioná-la no app todo. A cena selecionada fica com a barra
+   vermelha e as outras apagadas.
+5. Roteiro novo (outro tratamento)? Importe o PDF de novo: ele substitui o anterior e refaz as ligações.
+
+> Apareceu "parece ser uma imagem escaneada"
+  O PDF não tem texto (é foto das páginas). Exporte de novo a partir do programa em que o roteiro foi
+  escrito (Final Draft, WriterDuet, Word…).
+
+> Alguma cena não foi encontrada
+  Confira se o cabeçalho começa com o número da cena. Se não, crie o cartão com "+ CENA" e mande o PDF
+  para o Danilo, para melhorar a detecção.
+
+
+==============================
+BUSCA
+==============================
+
+⌘F (ou clique em "Buscar cena ou personagem"). Procura em número, resumo, personagens e notas.
+As cenas encontradas ganham borda amarela; as outras ficam cinza, sem sair do lugar.
+Filtros embaixo do campo: status, personagem, com notas, sem frame, parte. Esc limpa a busca.
+
+
+==============================
+MATERIAL E ZOOM
+==============================
+
+Botão "AÇO ▾": fundo do quadro (aço, cortiça, feltro, madeira, lousa, papel kraft, cinza liso),
+sombra e inclinação dos cartões, ou cartões alinhados em grade perfeita. Fica salvo no projeto.
+O controle − ○ + muda o tamanho dos cartões.
+
+
+==============================
+ATALHOS
+==============================
+
+⌘Z desfaz (inclusive arrastes)        ⇧⌘Z refaz
+⌘S salva (o Quadro já salva sozinho)  ⌘F busca
+⌘1 / ⌘2 / ⌘3  Quadro, Lista, Roteiro   ⌘I importar frames
+⌘N novo projeto                        ⌘O abrir projeto
+Setas: mudam a cena selecionada        Enter: edita o resumo
+Delete: apaga a cena (dá para desfazer) Esc: limpa a busca / fecha janelas
+(No Windows, Ctrl no lugar de ⌘.)
+
+
+==============================
+SE ALGO DER ERRADO
+==============================
+
+> Apaguei ou movi algo sem querer
+  ⌘Z desfaz, quantas vezes precisar (inclusive arrastes e importações).
+
+> "não foi possível salvar" no alto da tela
+  A pasta do projeto ficou inacessível (disco desconectado, sem permissão). Reconecte o disco; o Quadro
+  tenta de novo na próxima mudança, ou use ⌘S.
+
+> O projeto não abre / está estragado
+  O Quadro guarda a versão anterior em "projeto.json.bak", dentro da pasta .quadro, e usa ela sozinho
+  se o arquivo principal estragar.
+
+> Uma imagem não entrou
+  Formatos aceitos: JPG, PNG, TIFF, WebP. Arquivos de vídeo, PSD e RAW não entram.
+
+> Abriu o projeto errado
+  Arquivo > Abrir recente, ou Arquivo > Abrir projeto… e escolha a pasta .quadro certa.
+
+Dúvidas e sugestões: fale com o Danilo.
